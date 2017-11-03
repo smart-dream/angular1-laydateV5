@@ -15,11 +15,19 @@
         },
         link: function(scope, element, attr, ngModel) {
           scope.dateOptions = scope.dateOptions ? scope.dateOptions : {};
-          if (scope.dateOptions.minDate === 'now') {
-            scope.dateOptions.minDate = moment(new Date()).format('yyyy-MM-dd HH:mm:ss');
+          if (scope.dateOptions.minDate) {
+            if (scope.dateOptions.minDate === 'now') {
+              scope.dateOptions.minDate = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+            } else {
+              scope.dateOptions.minDate = moment(new Date(scope.dateOptions.minDate)).format('YYYY-MM-DD');
+            }
           }
-          if (scope.dateOptions.maxDate === 'now') {
-            scope.dateOptions.maxDate = moment(new Date()).format('yyyy-MM-dd HH:mm:ss');
+          if (scope.dateOptions.maxDate) {
+            if (scope.dateOptions.maxDate === 'now') {
+              scope.dateOptions.maxDate = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+            } else {
+              scope.dateOptions.maxDate = moment(new Date(scope.dateOptions.maxDate)).format('YYYY-MM-DD');
+            }
           }
           var config = {};
 
@@ -35,11 +43,12 @@
             trigger: 'click',
             zIndex: 1000, //弹出层的层级高度
             showBottom: scope.dateOptions.showBottom ? scope.dateOptions.showBottom : true, //是否显示底部栏
-            lang:'cn',//cn（中文版）、en（国际版，即英文版）
-            theme: '#205081',//可自己设置
+            lang: 'cn', //cn（中文版）、en（国际版，即英文版）
+            theme: '#205081', //可自己设置
             calendar: scope.dateOptions.calendar ? scope.dateOptions.calendar : false, //是否显示公历节日
             mark: {}, //标注重要日子
             ready: function(date) { //控件在打开时触发，回调返回一个参数：初始的日期时间对象
+              console.log(' scope.ngModel', scope.ngModel);
               console.log('ready', date); //得到初始的日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
             },
             change: function(value, date, endDate) { //年月日时间被切换时都会触发。回调返回三个参数，分别代表：生成的值、日期时间对象、结束的日期时间对象
@@ -60,7 +69,7 @@
             }
           };
           // 初始化
-          laydate.render(config);
+          var ins1 = laydate.render(config);
         }
       }
     })
