@@ -2,11 +2,12 @@
 <html ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>angularJs 通过http实现三级地区联动</title>
+  <title>angularJs 通过指令实现laydate插件</title>
   <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
   <style>
   body{font-size:14px;line-height:1.42857143;color: #000;}
   .container{margin-top:10px;}
+  .m-b-sm{margin-bottom: 15px;}
   </style>
   <script src="http://static.renwey.com/statics/libs/jquery/2.1.4/jquery_min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
@@ -18,37 +19,30 @@
 <body>
 
 <div class="container" ng-controller="myCtrl as vm">
-    <div class="col-md-6">
-      <div class="row form-group">date0:<br><input type="text" id="date0" ng-model="vm.dates.date0" jx-laydate/></div>
-      <div class="row form-group">date1:<br><input type="text" id="date1" ng-model="vm.dates.date1" jx-laydate date-options="{format:'yyyy',type:'year'}"/></div>
-      <div class="row form-group">date2:<br><input type="text" id="date2" ng-model="vm.dates.date2" jx-laydate date-options="{format:'yyyy-MM',type:'month'}"/></div>
-      <div class="row form-group">date3:<br><input type="text" id="date3" ng-model="vm.dates.date3" jx-laydate date-options="{format:'yyyy-MM-dd'}"/></div>
-      <div class="row form-group">date4:<br><input type="text" id="date4" ng-model="vm.dates.date4" jx-laydate date-options="{format:'yyyy-MM-dd',maxDate:'now'}"/></div>
-      <div class="row form-group">date5:<br><input type="text" id="date5" ng-model="vm.dates.date5" jx-laydate date-options="{format:'yyyy-MM-dd HH:ss:mm',type:'datetime',maxDate:'now'}"/></div>
-      <div class="row form-group">date6:<br><input type="text" id="date6" ng-model="vm.dates.date6" jx-laydate date-options="{format:'HH:ss:mm',type:'time'}"/></div>
-      <div class="row form-group">date7:<br><input type="text" id="date7" ng-model="vm.dates.date7" jx-laydate date-options="{format:'yyyy-MM-dd',range:'~'}"/></div>
-      <div class="row form-group">date8:<br><input type="text" id="date8" ng-model="vm.dates.date8" jx-laydate date-options="{format:'yyyy-MM-dd HH:ss:mm',type:'datetime',range:'~'}"/></div>
-    </div>
-    <div class="col-md-6">
-      <h3 class="col-md-12">选中日期</h3>
-      <div class="col-md-12"><pre>{{vm.dates | json}}</pre></div>
-    </div>
+  <div class="col-md-6">
+    <div class="row">ng-date0:<br><input class="form-control" type="text" id="date0" ng-model="vm.dates.date0" jx-laydate/></div>
+    <div class="row">ng-date1:<br><input class="form-control" type="text" id="date1" ng-model="vm.dates.date1" jx-laydate date-options="{format:'yyyy',type:'year'}" placeholder="yyyy"/></div>
+    <div class="row">ng-date2:<br><input class="form-control" type="text" id="date2" ng-model="vm.dates.date2" jx-laydate date-options="{format:'yyyy-MM',type:'month'}" placeholder="yyyy-MM"/></div>
+    <div class="row">ng-date3:<br><input class="form-control" type="text" id="date3" ng-model="vm.dates.date3" jx-laydate date-options="{format:'yyyy-MM-dd'}" placeholder="yyy-mm-dd"/></div>
+    <div class="row">ng-date4:<br><input class="form-control" type="text" id="date4" ng-model="vm.dates.date4" jx-laydate date-options="{format:'yyyy-MM-dd',maxDate:'now'}" placeholder="yyyy-MM-dd"/></div>
+    <div class="row">ng-date5:<br><input class="form-control" type="text" id="date5" ng-model="vm.dates.date5" jx-laydate date-options="{format:'yyyy-MM-dd HH:ss:mm',type:'datetime',maxDate:'now'}" placeholder="yyyy-MM-dd HH:ss:mm"/></div>
+    <div class="row">ng-date6:<br><input class="form-control" type="text" id="date6" ng-model="vm.dates.date6" jx-laydate date-options="{format:'HH:ss:mm',type:'time'}" placeholder="HH:ss:mm"/></div>
+    <div class="row">ng-date7:<br><input class="form-control" type="text" id="date7" ng-model="vm.dates.date7" jx-laydate date-options="{format:'yyyy-MM-dd',range:'~'}" placeholder="yyyy-MM-dd ~ yyyy-MM-dd"/></div>
+    <div class="row">ng-date8:<br><input class="form-control" type="text" id="date8" ng-model="vm.dates.date8" jx-laydate date-options="{format:'yyyy-MM-dd HH:ss:mm',type:'datetime',range:'~'}" placeholder="yyyy-MM-dd HH:ss:mm ~ yyyy-MM-dd HH:ss:mm"/></div>
+  </div>
+  <div class="col-md-6">
+    <h3 class="col-md-12">选中日期</h3>
+    <div class="col-md-12"><pre>{{vm.dates | json}}</pre></div>
+  </div>
 </div>
-<script>
-
-//执行一个laydate实例
-laydate.render({
-  elem: '#test1' //指定元素
-});
-</script>
 <script>
   var app = angular.module('myApp', ['jxLaydate']);
   app.controller('myCtrl', function($scope) {
     var vm = this;
     vm.dates={
-      date1:"2017-10-17",
-      date2:new Date("2017-11-12"),
-      date3:new Date("2017-11-12 13:45:23")
+      date1:"2017",
+      date2:new Date("2017-11"),
+      date5:new Date("2017-11-12 13:45:23")
     };
   });
 </script>
